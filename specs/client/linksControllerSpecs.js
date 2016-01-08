@@ -1,31 +1,41 @@
 "use strict";
 
 describe('LinksController', function () {
-  var $scope, $rootScope, createController, Links, $httpBackend;
-
+  var $scope, $rootScope, createController, Links, $httpBackend, $controller;
+  
   // using angular mocks, we can inject the injector
   // to retrieve our dependencies
   beforeEach(module('shortly'));
   beforeEach(inject(function($injector) {
 
     // mock out our dependencies
+    console.log('before each running >>>>>>>>>>');
     $rootScope = $injector.get('$rootScope');
+    console.log('<<<<<<<<<<<<<<<0>>>>>>>>>>', $controller);
     $httpBackend = $injector.get('$httpBackend');
-    Links = $injector.get('Links');
+    console.log('<<<<<<<<<<<<<<<00>>>>>>>>>>', $injector);
+    //broken!!
+    Links = $injector.get('Links'); 
+    console.log('<<<<<<<<<<<<<<<1>>>>>>>>>>', $controller);
     $scope = $rootScope.$new();
-
-    var $controller = $injector.get('$controller');
+    console.log('<<<<<<<<<<<<<<<2>>>>>>>>>>', $controller);
+    $controller = $injector.get('$controller');
 
     createController = function () {
-      return $controller('LinksController', {
+      console.log('creating controller! >>>', $controller);
+      $controller('LinksController', {
         $scope: $scope,
-        Links: Links
+        Links: Links,
       });
+      return $controller;
     };
+    console.log('injected controller >>>>>>>>>>', $controller);
   }));
 
   it('should have a data property on the $scope', function() {
+    console.log("HERE!!!!", createController);
     createController();
+    console.log("ALSO HERE!!!!")
     expect($scope.data).to.be.an('object');
   });
 

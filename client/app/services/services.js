@@ -5,6 +5,8 @@ angular.module('shortly.services', [])
   var linkFactory = {};
 
   linkFactory.getLinks = function(){
+
+    //returns promise
     return $http({ 
       method: 'GET',
       url: '/api/links', //double check
@@ -13,19 +15,30 @@ angular.module('shortly.services', [])
     .then(function (resp){
       return resp.data;//something else here
     });
+
   };
 
-  linkFactory.addLink = function(){
+  linkFactory.addLink = function(userUrl){
     return $http({ 
       method: 'POST',
       url: '/api/links', //double check
-      data: {}
+      data: {url:userUrl}
     })
     .then(function (resp){
       return resp;//something else here
     });
   };
 
+  linkFactory.useCode = function(code){
+    return $http({ 
+      method: 'GET',
+      url: '/api/links/' + code, //double check
+      data: {}
+    })
+    .then(function (resp){
+      return resp;//something else here
+    });
+  };
 
   return linkFactory;
 

@@ -23,6 +23,7 @@ module.exports = {
   allLinks: function (req, res, next) {
   var findAll = Q.nbind(Link.find, Link);
 
+  console.log('GET request in Links Controller');
   findAll({})
     .then(function (links) {
       res.json(links);
@@ -72,6 +73,7 @@ module.exports = {
   },
 
   navToLink: function (req, res, next) {
+    console.error('navigating!');
     var link = req.navLink;
     link.visits++;
     link.save(function (err, savedLink) {

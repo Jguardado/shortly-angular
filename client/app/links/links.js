@@ -1,11 +1,13 @@
-angular.module('shortly.links', [])
+angular.module('shortly.links', ['shortly.services' ])
 
-.controller('LinksController', function ($scope, Links) {
+.controller('LinksController',['$scope', 'Links', '$http', function ($scope, Links, $http) {
   // Your code here
   $scope.data = {
     links:[{},{},{}]
   };
-  $scope.getLinks = function(){};
+  $scope.getLinks = function(){
+    return Links.getLinks();
+  };
 
   $scope.getLinks();
-});
+}]);

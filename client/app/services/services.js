@@ -39,6 +39,7 @@ angular.module('shortly.services', [])
       data: {}
     })
     .then(function (resp){
+      console.log('!!!');
       return resp;//something else here
     });
   };

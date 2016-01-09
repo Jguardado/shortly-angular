@@ -1,5 +1,12 @@
 <div id='container' ng-controller="ShortenController">
 <!-- Your code here -->
+<div class='navigation'>
+<ul>
+  <li><a ui-sref="links">Links</a></li>
+  <li><a ui-sref="shorten">Shorten</a></li>
+</ul>
+</div>
+
 <form name="userForm"  ng-submit="submitForm(userForm.$valid,url)" novalidate>
     <input  type="url" ng-model="url" required>{{url}}
     <p ng-show="showMessage" class="help-block">{{message}}</p>

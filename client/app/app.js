@@ -3,34 +3,40 @@ angular.module('shortly', [
   'shortly.links',
   'shortly.shorten',
   'shortly.auth',
-  'ngRoute'
+  'ui.router'
 ])
-.config(function($routeProvider, $httpProvider) {
-  $routeProvider
-    .when('/', {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+  $urlRouterProvider.otherwise('/');
+  $stateProvider
+    .state('home', {
+      url: '/',
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController',
       authenticate: true
     })
-    .when('/signin', {
+    .state('signin', {
+      url: '/signin',
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController',
       authenticate: true
     })
-    .when('/signup', {
+    .state('signup', {
+      url: '/signup',
       templateUrl: 'app/auth/signup.html',
       controller: 'AuthController',
       authenticate: true
     })
-    .when('/links', {
+    .state('links', {
+      url: '/links',
       templateUrl: 'app/links/links.html',
       controller: 'LinksController',
       authenticate: true
     })
-    .when('/shorten', {
+    .state('shorten', {
+      url: '/shorten',
       templateUrl: 'app/shorten/shorten.html',
       controller: 'ShortenController',
-      authenticate: true
+
     })
     // Your code here
 
@@ -72,3 +78,38 @@ angular.module('shortly', [
     console.log('logged in, authorized =', next, next.$$route, next.$$route.requireAuth, Auth.isAuth());
   });
 });
+
+
+// .config(function($routeProvider, $httpProvider) {
+//   $routeProvider
+//     .when('/', {
+//       templateUrl: 'app/auth/signin.html',
+//       controller: 'AuthController',
+//       authenticate: true
+//     })
+//     .when('/signin', {
+//       templateUrl: 'app/auth/signin.html',
+//       controller: 'AuthController',
+//       authenticate: true
+//     })
+//     .when('/signup', {
+//       templateUrl: 'app/auth/signup.html',
+//       controller: 'AuthController',
+//       authenticate: true
+//     })
+//     .when('/links', {
+//       templateUrl: 'app/links/links.html',
+//       controller: 'LinksController',
+//       authenticate: true
+//     })
+//     .when('/shorten', {
+//       templateUrl: 'app/shorten/shorten.html',
+//       controller: 'ShortenController',
+      
+//     })
+//     // Your code here
+
+//     // We add our $httpInterceptor into the array
+//     // of interceptors. Think of it like middleware for your ajax calls
+//     $httpProvider.interceptors.push('AttachTokens');
+// })

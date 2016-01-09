@@ -73,13 +73,15 @@ module.exports = {
   },
 
   navToLink: function (req, res, next) {
-    console.error('navigating!');
+    console.error('navigating! to ',req.navLink);
     var link = req.navLink;
     link.visits++;
     link.save(function (err, savedLink) {
       if (err) {
         next(err);
       } else {
+        console.log(savedLink.url)
+        //res.writeHead
         res.redirect(savedLink.url);
       }
     });

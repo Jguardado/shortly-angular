@@ -5,7 +5,7 @@ angular.module('shortly.links', ['shortly.services'])
   $scope.data = {
     links:[]
   };
-  $scope.getLinks = function(value){
+  $scope.getLinks = function(){
     $scope.data = {};
   
     Links.getLinks().then(function(value){
@@ -17,7 +17,10 @@ angular.module('shortly.links', ['shortly.services'])
 
   $scope.useLink = function(code){
     //console.log('controller using link');
-    Links.useCode(code);
+    Links.useCode(code).finally(function(){
+      console.log('here');
+      $scope.getLinks();
+    });
   }
 
   $scope.signOut = function(){

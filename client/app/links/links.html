@@ -1,16 +1,25 @@
 <div id='container' ng-controller="LinksController">
   <!-- Your html here -->
+      
+  <div class='navigation'>
+  <ul>
+    <li><a ui-sref="links">Links</a></li>
+    <li><a ui-sref="shorten">Shorten</a></li>
+  </ul>
+  </div>
+
   <input type="text"ng-model="searchText">
   <a ng-click="signOut()">Sign Out</a>
   
   
-  <div class='link' ng-click='useLink(link.code)' ng-repeat="link in data.links | filter:searchText | orderBy : '-visits'">
-    <div class="stuff">
+  <div class='link' ng-repeat="link in data.links | filter:searchText | orderBy : '-visits'">
+    
+    <a class="stuff" href="{{link.base_url}}/api/links/{{link.code}}">
       <img src="assets/redirect_icon.png" >
       <div class='title'>{{link.title}}</div>
       <div class="original">{{link.url}}</div> 
       <div class="info">{{link.base_url}}/api/links/{{link.code}}</div>
-    </div>
+    </a>
     <p class='visits'><span class='count'>{{link.visits}}</span>visits</p>
   </div>
 

@@ -9,6 +9,7 @@ angular.module('shortly.auth', [])
   $scope.signin = function () {
     Auth.signin($scope.user)
       .then(function (token) {
+        console.log('setting storage object');
         $window.localStorage.setItem('com.shortly', token);
         $location.path('/links');
       })
@@ -27,4 +28,7 @@ angular.module('shortly.auth', [])
         console.error(error);
       });
   };
+  $scope.signOut= function(){
+    Auth.signout();
+  }
 });

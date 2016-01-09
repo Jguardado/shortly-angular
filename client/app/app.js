@@ -9,23 +9,28 @@ angular.module('shortly', [
   $routeProvider
     .when('/', {
       templateUrl: 'app/auth/signin.html',
-      controller: 'AuthController'
+      controller: 'AuthController',
+      authenticate: true
     })
     .when('/signin', {
       templateUrl: 'app/auth/signin.html',
-      controller: 'AuthController'
+      controller: 'AuthController',
+      authenticate: true
     })
     .when('/signup', {
       templateUrl: 'app/auth/signup.html',
-      controller: 'AuthController'
+      controller: 'AuthController',
+      authenticate: true
     })
     .when('/links', {
       templateUrl: 'app/links/links.html',
-      controller: 'LinksController'
+      controller: 'LinksController',
+      authenticate: true
     })
     .when('/shorten', {
       templateUrl: 'app/shorten/shorten.html',
-      controller: 'ShortenController'
+      controller: 'ShortenController',
+      authenticate: true
     })
     // Your code here
 
@@ -59,8 +64,11 @@ angular.module('shortly', [
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
+    console.log('checking user');
     if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+      console.log('not logged in');
       $location.path('/signin');
     }
+    console.log('logged in, authorized =', next, next.$$route, next.$$route.requireAuth, Auth.isAuth());
   });
 });

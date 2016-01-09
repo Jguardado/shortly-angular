@@ -71,8 +71,7 @@ h1 {
 
 .link .visits {
   float: right;
-  margin-right: 10px;
-  margin-left: 20px;
+  margin:0 10px 0 20px;
 }
 
 .link .visits .count {
@@ -144,5 +143,9 @@ input[type=url]:focus {
 
 .creator .message {
   clear: both;
+}
+
+.stuff{
+  float:left;
 }
 

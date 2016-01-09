@@ -1,6 +1,6 @@
-angular.module('shortly.links', ['shortly.services' ])
+angular.module('shortly.links', ['shortly.services'])
 
-.controller('LinksController',['$scope', 'Links', '$http', function ($scope, Links, $http) {
+.controller('LinksController',['$scope', 'Links', 'Auth','$http', function ($scope, Links, Auth, $http) {
   // Your code here
   $scope.data = {
     links:[]
@@ -18,6 +18,11 @@ angular.module('shortly.links', ['shortly.services' ])
   $scope.useLink = function(code){
     //console.log('controller using link');
     Links.useCode(code);
+  }
+
+  $scope.signOut = function(){
+    console.log('signing out');
+    Auth.signout();
   }
 
   $scope.getLinks();

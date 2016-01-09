@@ -32,6 +32,9 @@ angular.module('shortly.services', [])
   linkFactory.useCode = function(code){
     return $http({ 
       method: 'GET',
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
       url: '/api/links/' + code, //double check
       data: {}
     })
@@ -79,6 +82,7 @@ angular.module('shortly.services', [])
   };
 
   var signout = function () {
+    console.log('signing out');
     $window.localStorage.removeItem('com.shortly');
     $location.path('/signin');
   };
